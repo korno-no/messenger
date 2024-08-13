@@ -1,0 +1,81 @@
+
+.input_container{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    margin:10px 0;
+}
+.input_field {
+    padding: 10px 0 10px 10px;
+    border: 1px black solid;
+    border-radius: 8px;
+    font-size:14px;
+    z-index: 10;
+    
+}
+.input_label {
+    position: absolute;
+    transform: translateY(10px);
+    padding-left: 10px;
+    height: 25px;
+    z-index: 15;
+    transition:
+      font-size 0.5s,
+      transform 0.5s;
+}
+
+.input_field:focus-visible {
+    outline: none;
+}
+
+.input_field:not(:placeholder-shown)  + .input_label,
+.input_field:focus + .input_label {
+    transform: translateY(-16px);
+    font-size: 12px;
+}
+.input_field_password, 
+.input_field_password_confirm,
+.input_field_oldPassword,
+.input_field_newPassword{
+    -webkit-text-security: disc;
+}
+
+.input_field_wide + .input_label{       
+        transform: none;    
+        right: 10px;
+        top: 10px; 
+        padding-left: 0;
+        font-size: 14px;
+        transition: none;  
+}
+/* override for wide input when not placeholder-shown or focused */
+.input_field_wide:not(:placeholder-shown) + .input_label,
+.input_field_wide:focus + .input_label {
+    transform: none;   
+    font-size: 14px;
+}
+.input_error {
+    z-index: 1;
+    position: absolute;
+    top: 7px;
+    left: 7px;
+    right: -7px;
+    height: 41px;
+    width: -webkit-fill-available;
+    background-color: #E562AD;
+    border: 1px black solid;
+    border-radius: 8px;
+}
+
+.input_error-text{
+    position: absolute;
+    z-index: 20;
+    color: #E562AD;
+    right: 10px;
+    top: 10px;
+    font-size: 12px;
+}
+
+.input_field_wide{
+    width: 100%;
+}

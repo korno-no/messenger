@@ -1,0 +1,27 @@
+.cover-screen{
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    position: relative;  
+}
+.cover-screen_content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Align content to the right */
+    z-index: 10; /* Ensure content is on top of the image */
+}
+.cover-screen_image{
+    position: absolute;
+    left: 650px;
+    top: 30%;
+    z-index: -10;
+    width: 400px;
+    height: 300px;
+}
+
+.cover-screen_button{
+    margin-top: 30px;
+    margin-left: -10px;
+}

@@ -1,0 +1,62 @@
+.messenger{
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    border-right: black solid 1px;
+}
+.messenger_asside{
+    width: 40%;
+    border: black solid 1px;
+    margin: -1px; 
+}
+.messenger_main{
+    width:100%;
+    display:flex;
+    flex-direction: column;
+}
+.asside_header{
+    padding: 10px;
+    background-image: url('../../assets/images/background.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    display:flex;
+    flex-direction: column;
+}
+.conversation_contact{
+    display: flex;
+    align-items: center;
+    padding : 10px;
+    border-bottom: black solid 1px;
+}
+.conversation_avatar{
+    margin-right: 10px;
+}
+.conversation_add-info{
+    margin-left: auto;
+}
+.svg{
+    height:25px;
+}
+.conversation_bottom{
+    display:flex;
+    align-items: center;
+    margin-top: 5px;
+    border-top: black solid 1px; 
+    padding: 0 10px; 
+}
+.bottom_clip, .bottom_send{
+    flex: 0 0 auto;
+}
+.bottom_input{
+    flex: 1;
+    margin: 0 10px;
+}
+.chat{
+    display: flex;
+    flex-direction: column;
+    margin-top: auto;
+}
+.chat_date{
+    text-align: center;
+    font-size: 12px;
+}
