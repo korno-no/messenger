@@ -1,0 +1,59 @@
+.contact-card{
+    height: 100px;
+    padding: 10px 5px;
+    border: black solid 1px;
+    margin: -1px; 
+    border-right: none;
+    display: flex;
+    overflow: hidden;
+   
+}
+.contact-card_info{
+    display: flex;
+    padding: 0 10px;
+    flex-direction: column;
+    width:100%;
+  
+}
+.contact-card_1-line, .contact-card_2-line{
+    display: flex;
+}
+.avatar{
+    border: black solid 1px;
+    border-radius: 50%;
+    height: 60px;
+    width:60px;
+}
+.contact-card_message{
+    font-size: 14px;
+    height: auto;
+}
+.contact-card_name{
+    font-weight: 600;
+}
+
+.contact-card_date{
+    font-size: 12px;
+    margin-left: auto;
+}
+
+.contact-card_amount{
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin-left: auto;
+    margin-top: auto;
+    margin-bottom:auto ;
+}
+.contact-card_amount-back{
+    width: 25px; 
+    height: 25px;
+    background-color: #91C6F2; 
+    border-radius: 50%; 
+    z-index: -1; 
+}
+
+.contact-card_true{
+    background-color:  #91C6F2; 
+    border: black solid 1px;
+}

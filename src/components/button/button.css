@@ -1,0 +1,37 @@
+.button{
+    all: unset; 
+    padding: 10px;
+    cursor: pointer;
+    display: flex; 
+    
+}
+.button_primary{
+    margin: 10px 0;
+    height: 25px;
+    border: 1px black solid;
+    border-radius: 8px;
+    background-color: #A0F2DB;
+    font-weight: 600;
+    text-align: left; 
+}
+
+.button_link{
+    text-decoration: underline;
+}
+.button_link_dangerous{
+    text-decoration: underline;
+    color: #E562AD;
+}
+.button_secondary{
+    width: 15px;
+    height: 15px;
+    border: 1px black solid;
+    border-radius: 50%;
+    background-color: #A0F2DB;
+    align-items: center; 
+    justify-content: center; 
+}
+
+.button_text_pull-right{
+    margin-left: auto
+}

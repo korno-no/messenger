@@ -1,0 +1,27 @@
+.profile{
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    border-right: black solid 1px;
+}
+
+.profile_asside{
+    width: 3%;
+    border: black solid 1px;
+    margin: -1px; 
+    display: flex;         
+    justify-content: center; 
+    align-items: center;    
+
+}
+.profile_main{
+    width:100%;
+    display:flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center;
+}
+
+.profile_form{
+    width: 60%;
+}
