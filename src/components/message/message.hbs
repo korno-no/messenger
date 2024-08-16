@@ -2,7 +2,7 @@
 
     {{#if (eq type 'image')}}
         <div class="message_image">
-            <img class="image" src={{text}}>
+            <img class="image" src={{text}} alt="message as picture">
 
         </div>
     {{/if}}
@@ -12,7 +12,7 @@
     <div class="message_time">
         {{time}}
         {{#if (eq direction 'outgoing')}}
-            <img class="svg message_checked" src="./assets/icons/checks-double-v.svg">
+            <img class="svg message_checked" src="./assets/icons/checks-double-v.svg"  alt="message have been read">
         {{/if}}
     </div>
 </div>
