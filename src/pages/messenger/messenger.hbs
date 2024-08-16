@@ -1,0 +1,41 @@
+<div class="messenger">
+    <aside class="messenger_asside asside">
+        <div class="asside_header">
+            {{> Button text="profile >" type="text" modificator="pull-right"}}
+            {{> Input type="search" label="search"}}
+            
+        </div>
+        <div class="asside_list list">
+            {{> ContactList}}
+        </div>
+    </aside>
+    <main class="messenger_main conversation">
+        <div class="conversation_contact ">
+            <img src="./assets/images/ava3.jpeg" alt="" class="conversation_avatar avatar">
+            Vadim
+            <img src="./assets/icons/add-info.svg"/ class="conversation_add-info svg">
+        </div>
+
+
+        
+
+        <div class="conversation_chat chat">
+            <div class="chat_date">19 June</div>
+            {{> Message type="text" direction="incoming" time="11:35" text="shalom,
+question: if you could be any character from Futurama who would you pick?
+For me, I'd totally choose Fry. I mean, waking up in the future and discovering all the crazy stuff that’s happened, plus all the wild adventures with Bender and Leela? That’d be epic! Plus, Fry’s got that laid-back vibe and gets to experience the future firsthand. 🍕🚀"
+            }}
+            {{> Message type="image" direction="incoming"  time="11:36" text="./assets/images/message.jpg" }}
+            {{> Message type="text" direction="outgoing"  time="12:00" text="Are you nuts?? What Futurama?!?! I'm an X-Men fan" }}
+        </div>
+
+        
+
+
+        <div class="conversation_bottom bottom">
+            <img class="bottom_clip svg" src="./assets/icons/clip.svg"/ >
+            <div class="bottom_input">{{> Input type="message"}}</div>
+            <div class="bottom_send">{{> Button text="" type="secondary" modificator="arrow-right"}}</div>
+        </div>
+    </main>
+</div>

@@ -1,0 +1,25 @@
+<div class="contact-card contact-card_{{active}}">
+    <img src={{avatar}} alt="Avatar" class="contact-card_avatar avatar">
+
+
+   <div class="contact-card_info">
+    <div class="contact-card_1-line">
+        <div class="contact-card_name">  {{name}}</div>
+        <div class="contact-card_date">{{date}}</div>
+    </div>
+    <div class="contact-card_2-line">
+
+        <div class="contact-card_message"> 
+            {{#if sender}}
+                Me:
+            {{/if}}
+            {{message}}
+        </div>
+        {{#if amount}}
+            <div class="contact-card_amount">
+                <div class="contact-card_amount-back">{{amount}}</div>
+            </div>
+        {{/if}}
+    </div>
+   </div>
+</div>
