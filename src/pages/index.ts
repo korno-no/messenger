@@ -1,5 +1,5 @@
 export {NavigatePage} from './navigate'
-export {LoginPage} from './login'
+export {default as LoginPage} from './login'
 export {RegistrationPage} from './registration'
 export {MessengerPage} from './messenger'
 export {ProfilePage} from './profile'
