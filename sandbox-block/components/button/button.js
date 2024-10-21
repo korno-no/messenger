@@ -1,12 +1,17 @@
+import Block from "../../core/block";
+
+
 class Button extends Block {
     constructor(props) {
-        // Создаём враппер дом-элемент button
+        //wraper for DOM
         super("button", props);
     }
 
     render() {
-        // В проекте должен быть ваш собственный шаблонизатор
-        return `<div>${this.props.text}</div>`;
+       const { text } = this.props;
+       const source = "<div>{{text}}</div>";
+       const template = Handlebars.compile(source);
+       return template({ text });
     }
 }
 
@@ -19,8 +24,7 @@ function render(query, block) {
 const button = new Button({
     text: 'Click me',
     events: {
-        // Названия события точно такие же, как и у первого аргумента addEventListener: 
-        // click, mouseEnter, ...
+        // Name like addEventListener: click, mouseEnter, ...
         click: event => {
             console.log(event);
         },
@@ -41,4 +45,6 @@ setTimeout(() => {
         }
 
     });
-}, 1000);
+}, 10000);
+
+export default Button;

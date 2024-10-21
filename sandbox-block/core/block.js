@@ -1,3 +1,7 @@
+import EventBus from "./event-bus";
+import Handlebars from "handlebars";
+//import {v4 as makeUUID} from 'uuid';
+
 class Block {
   static EVENTS = {
     INIT: "init",
@@ -74,7 +78,6 @@ class Block {
     if (!nextProps) {
       return;
     }
-
     Object.assign(this.props, nextProps);
   };
 
@@ -84,8 +87,7 @@ class Block {
 
   _render() {
     const block = this.render();
-
-    this._removeEvents()
+    _removeEvents()
     // Этот небезопасный метод для упрощения логики
     // Используйте шаблонизатор из npm или напишите свой безопасный
     // Нужно не в строку компилировать (или делать это правильно),
@@ -112,6 +114,7 @@ class Block {
         return typeof value === "function" ? value.bind(target) : value;
       },
       set(target, prop, value) {
+
         target[prop] = value;
         
         // Запускаем обновление компоненты
@@ -119,7 +122,7 @@ class Block {
         self.eventBus().emit(Block.EVENTS.FLOW_CDU, {...target}, target);
         return true;
       },
-      deleteProperty() {
+      deleteProperty(target, prop) {
         delete target[prop];
         return true;
       }
@@ -141,7 +144,6 @@ class Block {
     const {events = {}} = this.props;
     Object.keys(events).forEach((event) => {
       this._element.removeEventListener(event, events[event]);
-      
     });
   }
   show() {
@@ -152,3 +154,5 @@ class Block {
     this.getContent().style.display = "none";
   }
 }
+
+export default Block;
