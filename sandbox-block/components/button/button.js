@@ -1,4 +1,5 @@
 import Block from "../../core/block";
+import Handlebars from "handlebars";
 
 
 class Button extends Block {
@@ -8,10 +9,10 @@ class Button extends Block {
     }
 
     render() {
-       const { text } = this.props;
-       const source = "<div>{{text}}</div>";
-       const template = Handlebars.compile(source);
-       return template({ text });
+        const { text } = this.props;
+        const source = "<div>{{text}}</div>";
+        const template = Handlebars.compile(source);
+        return template({ text });
     }
 }
 
@@ -23,6 +24,7 @@ function render(query, block) {
 
 const button = new Button({
     text: 'Click me',
+    settings: { withInternalID: true },
     events: {
         // Name like addEventListener: click, mouseEnter, ...
         click: event => {

@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "handlebars": "^4.7.8",
-    "lodash-es": "^4.17.21"
+    "lodash-es": "^4.17.21",
+    "uuid": "^10.0.0"
   }
 }

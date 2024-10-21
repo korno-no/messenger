@@ -1,6 +1,6 @@
 import EventBus from "./event-bus";
 import Handlebars from "handlebars";
-//import {v4 as makeUUID} from 'uuid';
+import {v4 as makeUUID} from 'uuid';
 
 class Block {
   static EVENTS = {
@@ -12,6 +12,7 @@ class Block {
 
   _element = null;
   _meta = null;
+  _id = null;
 
   /** JSDoc
    * @param {string} tagName
@@ -26,7 +27,11 @@ class Block {
       props
     };
 
-    this.props = this._makePropsProxy(props);
+    // generation unique UUID V4
+    this._id = makeUUID();
+
+     // Add ID to this.props of component, 
+    this.props = this._makePropsProxy({ ...props, __id: this._id });
 
     this.eventBus = () => eventBus;
 
@@ -86,8 +91,9 @@ class Block {
   }
 
   _render() {
+    console.log('render')
     const block = this.render();
-    _removeEvents()
+    this._removeEvents()
     // Этот небезопасный метод для упрощения логики
     // Используйте шаблонизатор из npm или напишите свой безопасный
     // Нужно не в строку компилировать (или делать это правильно),
