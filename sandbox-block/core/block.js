@@ -84,11 +84,15 @@ class Block {
 
   _render() {
     const block = this.render();
+
+    this._removeEvents()
     // Этот небезопасный метод для упрощения логики
     // Используйте шаблонизатор из npm или напишите свой безопасный
     // Нужно не в строку компилировать (или делать это правильно),
     // либо сразу в DOM-элементы возвращать из compile DOM-ноду
     this._element.innerHTML = block;
+    //we can add listeners only after element will be rendered
+    this._addEvents();
   }
 
   render() {}
@@ -116,7 +120,8 @@ class Block {
         return true;
       },
       deleteProperty() {
-        throw new Error("Нет доступа");
+        delete target[prop];
+        return true;
       }
     });
   }
@@ -126,6 +131,19 @@ class Block {
     return document.createElement(tagName);
   }
 
+  _addEvents() {
+    const {events = {}} = this.props;
+    Object.keys(events).forEach(event => {
+      this._element.addEventListener(event, events[event]);
+    });
+  }
+  _removeEvents(){
+    const {events = {}} = this.props;
+    Object.keys(events).forEach((event) => {
+      this._element.removeEventListener(event, events[event]);
+      
+    });
+  }
   show() {
     this.getContent().style.display = "block";
   }
