@@ -22,8 +22,8 @@ class Button extends Block<IButtonProps>{
 
     render(): string {
         return (`<button class="button button_{{type}} button_{{type}}_{{modificator}}">   
-                {{text}}
-            </button>
+                    {{text}}
+                </button>
             `)
     }
 };

@@ -1,6 +1,7 @@
 
 import { Button } from "../../components"
 import { BlockProps } from "../../core/block";
+import { ModalWrapper } from "../../wrappers/modal-wrapper"
 import Block from "../../core/block"
 
 
@@ -17,19 +18,25 @@ export default class LoginPage extends Block{
         })
     }
      init(){
-        
-        const ButtonLogin = new Button({
+        const Modal = new ModalWrapper({
+            title: 'test modal',
+            settings: {withInternalID: true},
+
+        })
+       /*  const ButtonLogin = new Button({
             type: 'primary',
             text: 'login',
             modificator: '',
+            settings: {withInternalID: true},
             onClick: (e: Event) => {
                 e.preventDefault();
                 console.log('button click');
             }
-        }); 
+        });  */
         this.children = {
+            Modal,
             ...this.children,
-            ButtonLogin,
+           // ButtonLogin,
         }
         this.name = 'LoginPage'
 
@@ -37,7 +44,9 @@ export default class LoginPage extends Block{
 
     render(): string {
         return (`
-          <div>{{{ButtonLogin}}}</div>
+            {{{Modal}}}
+         
         `)
+        // <div>{{{ButtonLogin}}}</div>
     }
 }

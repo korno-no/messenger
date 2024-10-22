@@ -1,6 +1,7 @@
 import Handlebars from 'handlebars';
 import * as Components from './components';
 import * as Pages from './pages';
+import * as Wrappers from './wrappers'
 
 declare global {
   export type Keys<T extends Record<string, unknown>> = keyof T;
@@ -22,6 +23,13 @@ const pages = {
 Object.entries(Components).forEach(([ name, component ]) => {
   if (typeof component === 'string') {
     Handlebars.registerPartial(name, component);
+  }
+});
+
+Object.entries(Wrappers).forEach(([ name, wrapper ]) => {
+  debugger
+  if (typeof wrapper === 'string') {
+    Handlebars.registerPartial(name, wrapper);
   }
 });
 
