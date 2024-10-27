@@ -26,14 +26,6 @@ Object.entries(Components).forEach(([ name, component ]) => {
   }
 });
 
-Object.entries(Wrappers).forEach(([ name, wrapper ]) => {
-  debugger
-  if (typeof wrapper === 'string') {
-    Handlebars.registerPartial(name, wrapper);
-  }
-});
-
-
 function navigate(page: string) {
   //@ts-ignore
   const [ source, context ] = pages[page];

@@ -3,3 +3,34 @@
     display: flex;
     flex-direction: column;
 }
+
+.wrapper {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
+}
+
+.wrapper_title{
+    margin: 15px 0;
+}
+.modal{
+    display: flex;
+    flex-direction: column;
+    padding: 50px 30px 30px;
+    width: 340px;
+    margin: auto;
+    border: black 3px solid;
+    border-radius: 12px;
+    background-image: url('../../assets/images/background.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}
+
+.login_title{
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+

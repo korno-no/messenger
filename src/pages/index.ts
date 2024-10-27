@@ -1,6 +1,6 @@
 export {NavigatePage} from './navigate'
 export {default as LoginPage} from './login'
-export {RegistrationPage} from './registration'
+export {default as RegistrationPage} from './registration'
 export {MessengerPage} from './messenger'
 export {ProfilePage} from './profile'
 export {ErrorPage} from './404'

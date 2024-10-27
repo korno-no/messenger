@@ -86,7 +86,6 @@ export default class Block<T extends BlockProps = BlockProps> {
     }
 
     _componentDidUpdate(oldProps: T, newProps: T) {
-        console.log('CDU')
         const response = this.componentDidUpdate(oldProps, newProps);
         if (!response) {
             return;
@@ -126,9 +125,9 @@ export default class Block<T extends BlockProps = BlockProps> {
     }
 
     _render() {
-        console.log('render')
         const templateString: string = this.render();// get template of component as string
         this.compile(templateString, { ...this.props })
+        //console.log(this._element)
         this._removeEvents();
         this._addEvents();
     }
@@ -198,32 +197,29 @@ export default class Block<T extends BlockProps = BlockProps> {
             this._element!.removeEventListener(event, events[event] as EventListener);
         });
     }
-    compile(templateString: string, props: any) {
-
-        const fragment = this._createDocumentElement('template') as HTMLTemplateElement; // Cast to HTMLTemplateElement
+    compile(template: string, props: any) {
         const propsAndStubs: { [key: string]: any } = { ...props };// copy props 
-        const compiledTemplate = Handlebars.compile(templateString);
-
-        fragment.innerHTML = compiledTemplate(propsAndStubs);// looks like insert values
-
-        Object.entries(this.children).forEach(([key, child]) => {
+        //create stubs
+        Object.entries(this.children).forEach(([key, child]) => { 
             propsAndStubs[key] = `<div data-id="${child._id}"></div>`
         });
 
-        fragment.innerHTML = Handlebars.compile(templateString)(propsAndStubs);//insert stub
-        const newElement = fragment.content.firstElementChild as HTMLElement;
+        const fragment = this._createDocumentElement('template') as HTMLTemplateElement; 
+        fragment.innerHTML = Handlebars.compile(template)(propsAndStubs);//insert values
+        
 
-        Object.values(this.children).forEach(child => { //switch stubs back to html element
+        //switch stubs back to html element
+        Object.values(this.children).forEach(child => { 
             const content = child.getContent();
             const stub = fragment.content.querySelector(`[data-id="${child._id}"]`);
             if (content && stub) {
                 stub.replaceWith(content);
             }
         });
-        if (this._element && newElement) {
-            this._element.replaceWith(newElement);
-        }
-        this._element = newElement;
+        //insert created elemnt into DOM
+        const block = fragment.content.firstElementChild as HTMLElement;
+        this._element?.replaceWith(block);
+        this._element = block as HTMLElement;
     }
 
     show() {

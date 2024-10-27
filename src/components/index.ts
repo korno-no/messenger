@@ -1,6 +1,6 @@
 export { Button } from './button'
 export { Input } from './input'
-export { Modal } from './modal'
+export { InputWrapper } from './input/input-wrapper'
 export { ContactListCard } from './contact-list-card'
 export { ContactList } from './contact-list'
 export { Message } from './message'

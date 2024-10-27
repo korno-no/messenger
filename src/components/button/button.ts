@@ -3,9 +3,10 @@ import { BlockProps } from "../../core/block";
 
 
 interface IButtonProps extends BlockProps  {
-    type: "primary" | "link";
+    mode: "primary" | "link";
+    type?: "submit";
     text: string;
-    modificator: string;
+    modificator?: string;
     onClick?: (e: Event) => void;
     events?: { [key: string]: EventListenerOrEventListenerObject };
 }
@@ -18,10 +19,17 @@ class Button extends Block<IButtonProps>{
                 click: props.onClick ?? (() => {}) 
             }
         })
+        
     }
 
     render(): string {
-        return (`<button class="button button_{{type}} button_{{type}}_{{modificator}}">   
+        return (`<button class="button button_{{mode}} button_{{mode}}_{{modificator}}" type="{{type}}">
+                    {{#if (eq modificator 'arrow-right')}}
+                        <img class="svg" src="./assets/icons/arrow-right.svg" alt="arror right">
+                    {{/if}}
+                    {{#if (eq modificator 'arrow-left')}}
+                        <img class="svg" src="./assets/icons/arrow-left.svg" alt="arror left">
+                    {{/if}}
                     {{text}}
                 </button>
             `)
