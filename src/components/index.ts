@@ -1,7 +1,6 @@
 export { Button } from './button'
 export { Input } from './input'
 export { InputWrapper } from './input/input-wrapper'
-export { ContactListCard } from './contact-list-card'
-export { ContactList } from './contact-list'
+export { ContactCard } from './contact-card'
 export { Message } from './message'
 export { CoverScreen } from './cover-screen'

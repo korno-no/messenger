@@ -18,8 +18,8 @@ export default class Validation {
             case "phone":
                 const phoneRefex = /^\+?\d{10,15}$/;
                 return phoneRefex.test(value);
-
-
+            case "message":
+                return value !== '';
             default:
                 return true;
                 

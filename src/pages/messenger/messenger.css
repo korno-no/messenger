@@ -3,6 +3,8 @@
     width: 100%;
     height: 100vh;
     border-right: black solid 1px;
+    overflow-y: hidden; 
+
 }
 .messenger_asside{
     width: 40%;
@@ -21,6 +23,7 @@
     background-size: cover;
     display:flex;
     flex-direction: column;
+    height: 125px; 
 }
 .conversation_contact{
     display: flex;
@@ -55,8 +58,15 @@
     display: flex;
     flex-direction: column;
     margin-top: auto;
+    max-height: calc(100vh - 125px);
+    overflow-y: auto; 
 }
 .chat_date{
     text-align: center;
     font-size: 12px;
+}
+
+.asside_list.list {
+    max-height: calc(100vh - 125px); 
+    overflow-y: auto; 
 }

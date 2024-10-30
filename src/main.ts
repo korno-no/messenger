@@ -1,7 +1,6 @@
 import Handlebars from 'handlebars';
 import * as Components from './components';
 import * as Pages from './pages';
-import * as Wrappers from './wrappers'
 
 declare global {
   export type Keys<T extends Record<string, unknown>> = keyof T;
@@ -16,7 +15,6 @@ const pages = {
   'profile': [ Pages.ProfilePage ],
   '404': [ Pages.ErrorPage ],
   '500': [ Pages.ErrorFixingPage ],
-  'modals': [ Pages.ModalsPage ],
 };
 
 

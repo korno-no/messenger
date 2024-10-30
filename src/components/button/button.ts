@@ -3,9 +3,9 @@ import { BlockProps } from "../../core/block";
 
 
 interface IButtonProps extends BlockProps  {
-    mode: "primary" | "link";
-    type?: "submit";
-    text: string;
+    mode?: "primary" | "link" | "secondary";
+    type?: "submit" | "text";
+    text?: string;
     modificator?: string;
     onClick?: (e: Event) => void;
     events?: { [key: string]: EventListenerOrEventListenerObject };

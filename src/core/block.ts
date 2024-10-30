@@ -3,7 +3,7 @@ import Handlebars from "handlebars";
 import { v4 as makeUUID } from 'uuid';
 
 type TEvents = Values<typeof Block.EVENTS>
-type PropsWithChildren<T> = T & { [key: string]: any };
+type PropsWithChildren<T> = T & {  [key: string]: any | (Block<any> | Partial<T>)[]; };
 
 
 type Events = {
@@ -29,6 +29,7 @@ export default class Block<T extends BlockProps = BlockProps> {
     _meta = null;
     _id: string;
     children;
+    lists;
     name: string;
 
     //private _eventbus;
@@ -37,12 +38,13 @@ export default class Block<T extends BlockProps = BlockProps> {
 
     constructor(propsWithChildren: PropsWithChildren<T>) {
         const eventBus = new EventBus<TEvents>();//init eventBus
-        const { props, children } = this._getChildrenAndProps(propsWithChildren); //pars children and props
+        const { props, children, lists } = this._getChildrenAndProps(propsWithChildren); //pars children and props
 
         //create a proxy that allows events to be triggered
         this._id = makeUUID();
         this.props = this._makePropsProxy({ ...props, __id: this._id });
         this.children = children;
+        this.lists = this._makePropsProxy(lists);
 
         this.name = '';
         this.eventBus = () => eventBus;
@@ -86,6 +88,7 @@ export default class Block<T extends BlockProps = BlockProps> {
     }
 
     _componentDidUpdate(oldProps: T, newProps: T) {
+        console.log('CDU')
         const response = this.componentDidUpdate(oldProps, newProps);
         if (!response) {
             return;
@@ -100,16 +103,22 @@ export default class Block<T extends BlockProps = BlockProps> {
     _getChildrenAndProps(propsAndChildren: PropsWithChildren<T>) {
         const children: Record<string, Block<any>> = {};
         const props: Partial<T> = {};
+        const lists: Record<string, Block<any>[]> = {}
 
         Object.entries(propsAndChildren).forEach(([key, value]) => {
             if (value instanceof Block) {
                 children[key] = value;
-            } else {
+            } 
+            else if(Array.isArray(value)){
+                
+                lists[key] = value;
+            }
+            else {
                 props[key as keyof T] = value as T[keyof T];
             }
         });
 
-        return { children, props };
+        return { children, props, lists };
     }
 
     setProps = (nextProps: any) => {
@@ -127,7 +136,7 @@ export default class Block<T extends BlockProps = BlockProps> {
     _render() {
         const templateString: string = this.render();// get template of component as string
         this.compile(templateString, { ...this.props })
-        //console.log(this._element)
+        console.log(this._element)
         this._removeEvents();
         this._addEvents();
     }
@@ -151,7 +160,7 @@ export default class Block<T extends BlockProps = BlockProps> {
         return this._element;
     }
 
-    _makePropsProxy(props: Partial<T>): T {
+    _makePropsProxy(props: Partial<T> | Record<string, Block<any>[]> ): T {
         // TODO change it into arrow function
         const self = this;
 
@@ -203,6 +212,9 @@ export default class Block<T extends BlockProps = BlockProps> {
         Object.entries(this.children).forEach(([key, child]) => { 
             propsAndStubs[key] = `<div data-id="${child._id}"></div>`
         });
+        Object.entries(this.lists).forEach(([key, child]) => { 
+            propsAndStubs[key] = `<div data-id="${this._id}"></div>`
+        });
 
         const fragment = this._createDocumentElement('template') as HTMLTemplateElement; 
         fragment.innerHTML = Handlebars.compile(template)(propsAndStubs);//insert values
@@ -216,8 +228,34 @@ export default class Block<T extends BlockProps = BlockProps> {
                 stub.replaceWith(content);
             }
         });
+        
+        let block = fragment.content.firstElementChild as HTMLElement;
+        Object.entries(this.lists).forEach(([key, child]) => { 
+                const stub = fragment.content.querySelector( `[data-id="${this._id}"]`);
+                if(!stub) {
+                    return
+                };
+                const listContent = this._createDocumentElement('template') as HTMLTemplateElement; 
+
+                (child as Array<{ getContent: () => any; } | null>)?.forEach((item) => {
+                    if(item instanceof Block && item !== null){
+                        
+                        const content = item.getContent();
+                        if(content){
+                            listContent.content.append(content);
+                        }
+                    }
+                    else{
+                        listContent.content.append(`${item}`);
+                    }
+                })
+                if (listContent && stub) {
+                    stub.replaceWith(listContent.content);
+                    block = fragment.content as unknown as HTMLElement;
+                }
+            
+        });
         //insert created elemnt into DOM
-        const block = fragment.content.firstElementChild as HTMLElement;
         this._element?.replaceWith(block);
         this._element = block as HTMLElement;
     }

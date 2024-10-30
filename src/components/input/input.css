@@ -79,3 +79,7 @@
 .input_field_wide{
     width: 100%;
 }
+.input_field_bottom{
+    flex: 1;
+    margin: 10px 10px;
+}
