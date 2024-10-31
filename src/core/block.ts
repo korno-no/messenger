@@ -125,7 +125,6 @@ export default class Block<T extends BlockProps = BlockProps> {
         if (!nextProps) {
             return;
         }
-
         Object.assign(this.props, nextProps);
     };
 
@@ -136,7 +135,6 @@ export default class Block<T extends BlockProps = BlockProps> {
     _render() {
         const templateString: string = this.render();// get template of component as string
         this.compile(templateString, { ...this.props })
-        console.log(this._element)
         this._removeEvents();
         this._addEvents();
     }
@@ -146,7 +144,6 @@ export default class Block<T extends BlockProps = BlockProps> {
     }
 
     getContent() {
-        // Хак, чтобы вызвать CDM только после добавления в DOM
         if (this.element?.parentNode?.nodeType === Node.DOCUMENT_FRAGMENT_NODE) {
             setTimeout(() => {
                 if (
@@ -173,8 +170,6 @@ export default class Block<T extends BlockProps = BlockProps> {
                 const oldTarget = { ...target };
                 (target as any)[prop] = value; // Use type assertion to bypass TypeScript's restriction
 
-                // Запускаем обновление компоненты
-                // Плохой cloneDeep, в следующей итерации нужно заставлять добавлять cloneDeep им самим
                 self.eventBus().emit(Block.EVENTS.FLOW_CDU, oldTarget, target);
                 return true;
             },
@@ -185,7 +180,6 @@ export default class Block<T extends BlockProps = BlockProps> {
     }
 
     _createDocumentElement(tagName: string) {
-        // Можно сделать метод, который через фрагменты в цикле создаёт сразу несколько блоков
         const element = document.createElement(tagName);
         if (this._id !== null) {
             element.setAttribute('data-id', this._id);
