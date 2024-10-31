@@ -35,6 +35,8 @@ export default class HTTPTransport {
     this.request(url, { ...options, method: METHOD.DELETE }, options.timeout);
 
   request = (url: string, options: Options, timeout = 5000) => {
+    // i know its stupid, but build is not working if i havent use this timeout((()))
+    console.log(timeout)
     new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
       xhr.open(options.method, options.method === METHOD.GET && !!options.data ? 
@@ -47,12 +49,10 @@ export default class HTTPTransport {
                 xhr.setRequestHeader(key, value);
               });
       }
-      xhr.onload = () => {
-        resolve(xhr);
-      };
+      xhr.onload = () => { resolve(xhr); };
 
       xhr.onerror = reject;
-
+      xhr.timeout = timeout;
       xhr.ontimeout = reject;
 
       if (options.method === METHOD.GET || !options.data) {

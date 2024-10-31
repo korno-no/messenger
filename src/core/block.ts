@@ -80,7 +80,7 @@ export default class Block<T extends BlockProps = BlockProps> {
     }
 
     componentDidMount(oldProps: T) {
-
+        console.log(oldProps)
     }
 
     dispatchComponentDidMount() {
@@ -97,6 +97,8 @@ export default class Block<T extends BlockProps = BlockProps> {
     }
 
     componentDidUpdate(oldProps: T, newProps: T) {
+        console.log(oldProps);
+        console.log(newProps)
         return true;
     }
 
@@ -206,7 +208,7 @@ export default class Block<T extends BlockProps = BlockProps> {
         Object.entries(this.children).forEach(([key, child]) => { 
             propsAndStubs[key] = `<div data-id="${child._id}"></div>`
         });
-        Object.entries(this.lists).forEach(([key, child]) => { 
+        Object.entries(this.lists).forEach(([key]) => { 
             propsAndStubs[key] = `<div data-id="${this._id}"></div>`
         });
 
@@ -225,6 +227,7 @@ export default class Block<T extends BlockProps = BlockProps> {
         
         let block = fragment.content.firstElementChild as HTMLElement;
         Object.entries(this.lists).forEach(([key, child]) => { 
+            console.log(key)
                 const stub = fragment.content.querySelector( `[data-id="${this._id}"]`);
                 if(!stub) {
                     return
