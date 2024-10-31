@@ -88,12 +88,13 @@ export default class MessengerPage extends Block <IMessengerProps>{
             onClick: (e: Event) => {
                 e.preventDefault();
                 console.log("Send mesage button have been pressed");
+        
                 let messageInput = document.querySelector('.input_field_message') as HTMLInputElement;
                 if(messageInput){
                     const error = !Validation.validate(messageInput.value, "message");
                     if(error) console.log('ooops, input is empty, we cant send empty message')
                     else{
-                        console.log("Message have been send",messageInput.value );
+                        console.log({messageInput:messageInput.value} );
                     }    
                 }
                 // MessageInput.setProps({ error });

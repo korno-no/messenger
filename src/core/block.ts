@@ -79,8 +79,8 @@ export default class Block<T extends BlockProps = BlockProps> {
         });
     }
 
-    componentDidMount(oldProps: T) {
-        console.log(oldProps)
+    componentDidMount(_oldProps: T) {
+       
     }
 
     dispatchComponentDidMount() {
@@ -88,7 +88,6 @@ export default class Block<T extends BlockProps = BlockProps> {
     }
 
     _componentDidUpdate(oldProps: T, newProps: T) {
-        console.log('CDU')
         const response = this.componentDidUpdate(oldProps, newProps);
         if (!response) {
             return;
@@ -96,9 +95,7 @@ export default class Block<T extends BlockProps = BlockProps> {
         this._render();
     }
 
-    componentDidUpdate(oldProps: T, newProps: T) {
-        console.log(oldProps);
-        console.log(newProps)
+    componentDidUpdate(_oldProps: T, _newProps: T) {
         return true;
     }
 
@@ -226,8 +223,8 @@ export default class Block<T extends BlockProps = BlockProps> {
         });
         
         let block = fragment.content.firstElementChild as HTMLElement;
-        Object.entries(this.lists).forEach(([key, child]) => { 
-            console.log(key)
+        Object.entries(this.lists).forEach(([_key, child]) => { 
+            
                 const stub = fragment.content.querySelector( `[data-id="${this._id}"]`);
                 if(!stub) {
                     return

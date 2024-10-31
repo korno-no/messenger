@@ -238,14 +238,16 @@ export default class ProfilePage extends Block <IProfileProps>{
     OnChangeData() {
         console.log("we clicked OnChangeData")
         let inputsCollection = document.querySelectorAll('input');
+        let filledValues: {[key: string]: string} = {};
         inputsCollection.forEach( input => {
-            console.log(`${input.id} value > ${input.value}`)
+            filledValues[input.id] = input.value;
             if (input.id && input.id !== '/') {
                 const error = !Validation.validate(input.value, input.name);
                 //TODO: add check if error have been changed
                 this.children[input.id].setProps({ error });
             }
         })
+        console.log(filledValues)
     }
 
     

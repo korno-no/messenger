@@ -57,7 +57,7 @@ export default class LoginPage extends Block <ILoginProps>{
                 }
             }),
         });
-        const ButtonSignIn= new Button({mode: 'primary',text: 'Sign in', settings: {withInternalID: true},
+        const ButtonSignIn= new Button({mode: 'primary',text: 'Sign in', type:'submit' ,settings: {withInternalID: true},
             onClick: (e: Event) => {
                 e.preventDefault();
                 this.onSignIn()
@@ -81,14 +81,16 @@ export default class LoginPage extends Block <ILoginProps>{
     onSignIn() {
         console.log("we clicked onSignIn")
         let inputsCollection = document.querySelectorAll('input');
+        let filledValues: {[key: string]: string} = {};
         inputsCollection.forEach( input => {
-            console.log(`${input.id} value > ${input.value}`)
+            filledValues[input.id] = input.value
             if (input.id && input.id !== '/') {
                 const error = !Validation.validate(input.value, input.name);
                 //TODO: add check if error have been changed
                 this.children[input.id].setProps({ error });
             }
         })
+        console.log(filledValues)
 
     }
     onSignUp(){
