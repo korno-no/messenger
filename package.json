@@ -8,7 +8,9 @@
     "prebuild": "tsc --noEmit",
     "build": "npm run prebuild && vite build",
     "start": "vite build && node ./server.js",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "lint": "eslint . --ext .ts,.js && stylelint '**/*.{css,scss}'"
+
   },
   "devDependencies": {
     "@types/uuid": "^10.0.0",

@@ -74,7 +74,7 @@ export default class Block<T extends BlockProps = BlockProps> {
     _componentDidMount() {
         //this.componentDidMount();
 
-        Object.values(this.children).forEach((child: any) => {
+        Object.values(this.children).forEach((child: Block<any>) => {
             child.dispatchComponentDidMount();
         });
     }
@@ -120,7 +120,7 @@ export default class Block<T extends BlockProps = BlockProps> {
         return { children, props, lists };
     }
 
-    setProps = (nextProps: any) => {
+    setProps = (nextProps: Partial<T> | Record<string, Block<any>[]>) => {
         if (!nextProps) {
             return;
         }
@@ -224,16 +224,13 @@ export default class Block<T extends BlockProps = BlockProps> {
         
         let block = fragment.content.firstElementChild as HTMLElement;
         Object.entries(this.lists).forEach(([_key, child]) => { 
-            
                 const stub = fragment.content.querySelector( `[data-id="${this._id}"]`);
                 if(!stub) {
                     return
                 };
                 const listContent = this._createDocumentElement('template') as HTMLTemplateElement; 
-
                 (child as Array<{ getContent: () => any; } | null>)?.forEach((item) => {
                     if(item instanceof Block && item !== null){
-                        
                         const content = item.getContent();
                         if(content){
                             listContent.content.append(content);
@@ -247,7 +244,6 @@ export default class Block<T extends BlockProps = BlockProps> {
                     stub.replaceWith(listContent.content);
                     block = fragment.content as unknown as HTMLElement;
                 }
-            
         });
         //insert created elemnt into DOM
         this._element?.replaceWith(block);
